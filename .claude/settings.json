@@ -1,0 +1,259 @@
+{
+  "model": "opus",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "in=$(cat); printf '%s' \"$in\" | grep -Eq '\"command\": *\"([^\"]*(&&|\\|\\||;|\\|) *)?((npm|bb|brazil-build)( +run)? +(lint|build|release)|bbr( |\"|&|;|\\|)|bb *(\"|&|;|\\|))' && printf '%s' \"$in\" | jq -r '(.tool_response.stdout // \"\") + \"\\n\" + (.tool_response.stderr // \"\") + \"\\n\" + (.error // \"\")' 2>/dev/null | grep -qiE 'BUILD SUCCEED' && command -v afplay > /dev/null 2>&1 && { afplay -v 0.25 $HOME/.claude/sfx/pokemon-level-up.mp3 & }; exit 0"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "in=$(cat); printf '%s' \"$in\" | grep -Eq '\"command\": *\"([^\"]*(&&|\\|\\||;|\\|) *)?((npm|bb|brazil-build)( +run)? +(lint|build|release)|bbr( |\"|&|;|\\|)|bb *(\"|&|;|\\|))' && printf '%s' \"$in\" | jq -r '(.tool_response.stdout // \"\") + \"\\n\" + (.tool_response.stderr // \"\") + \"\\n\" + (.error // \"\")' 2>/dev/null | grep -qiE 'BUILD FAILED' && command -v afplay > /dev/null 2>&1 && { afplay -v 0.25 $HOME/.claude/sfx/fahh.mp3 & }; exit 0"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "in=$(cat); printf '%s' \"$in\" | grep -Eq '\"command\": *\"([^\"]*(&&|\\|\\||;|\\|) *)?((npm|yarn|pnpm|bb|brazil-build)( +run)? +test|(npx +)?jest)' || exit 0; out=$(printf '%s' \"$in\" | jq -r '(.tool_response.stdout // \"\") + \"\\n\" + (.tool_response.stderr // \"\") + \"\\n\" + (.error // \"\")' 2>/dev/null); [ -z \"$(printf '%s' \"$in\" | jq -r '.error // \"\"' 2>/dev/null)\" ] && printf '%s' \"$out\" | grep -qE 'Test Suites:.*[0-9]+ passed' && ! printf '%s' \"$out\" | grep -qE '(Test Suites|Tests):.*[0-9]+ failed|coverage threshold.*not met|No tests found' && command -v afplay > /dev/null 2>&1 && { afplay -v 0.25 $HOME/.claude/sfx/pokemon-level-up.mp3 & }; exit 0"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "in=$(cat); printf '%s' \"$in\" | grep -Eq '\"command\": *\"([^\"]*(&&|\\|\\||;|\\|) *)?((npm|yarn|pnpm|bb|brazil-build)( +run)? +test|(npx +)?jest)' || exit 0; out=$(printf '%s' \"$in\" | jq -r '(.tool_response.stdout // \"\") + \"\\n\" + (.tool_response.stderr // \"\") + \"\\n\" + (.error // \"\")' 2>/dev/null); printf '%s' \"$out\" | grep -qE '(Test Suites|Tests):.*[0-9]+ failed|coverage threshold.*not met|No tests found' && command -v afplay > /dev/null 2>&1 && { afplay -v 0.25 $HOME/.claude/sfx/roblox-off.mp3 & }; exit 0"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "grep -Eq '\"command\": *\"([^\"]*(&&|\\|\\||;|\\|) *)?git +push' && command -v afplay > /dev/null 2>&1 && { afplay $HOME/.claude/sfx/yoooooo.mp3 & }; exit 0"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "grep -Eq '\"command\": *\"([^\"]*(&&|\\|\\||;|\\|) *)?git +commit' && command -v afplay > /dev/null 2>&1 && { afplay $HOME/.claude/sfx/rizz.mp3 & }; exit 0"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "command -v afplay > /dev/null 2>&1 && afplay -v 0.45 -r $(awk -v s=$(od -An -N4 -tu4 /dev/urandom | tr -d ' ') 'BEGIN{srand(s); printf \"%.3f\", 0.85 + rand() * 0.40}') $HOME/.claude/sfx/tool-call-blip.mp3 &"
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write|MultiEdit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "command -v afplay > /dev/null 2>&1 && afplay -v 0.45 -r $(awk -v s=$(od -An -N4 -tu4 /dev/urandom | tr -d ' ') 'BEGIN{srand(s); printf \"%.3f\", 0.80 + rand() * 0.50}') $HOME/.claude/sfx/file-edited-bing.mp3 &"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "grep -Eq '\"command\": *\"([^\"]*(&&|\\|\\||;|\\|) *)?((npm|bb|brazil-build)( +run)? +(lint|test|build|release)|bbr( |\"|&|;|\\|)|bb *(\"|&|;|\\|))' && command -v afplay > /dev/null 2>&1 && { afplay -v 0.25 $HOME/.claude/sfx/driftveil-city.mp3 & }; exit 0"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "grep -Eq '\"command\": *\"([^\"]*(&&|\\|\\||;|\\|) *)?(npm|bb|brazil-build)( +run)? +install' && command -v afplay > /dev/null 2>&1 && { afplay -v 0.25 $HOME/.claude/sfx/tryna.mp3 & }; exit 0"
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "command -v afplay > /dev/null 2>&1 && afplay -v 0.4 $HOME/.claude/sfx/bubble-pop.mp3 &"
+          }
+        ]
+      },
+      {
+        "matcher": "WebFetch|WebSearch",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "command -v afplay > /dev/null 2>&1 && afplay -v 0.4 $HOME/.claude/sfx/tool-call-blip.mp3 &"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "command -v afplay > /dev/null 2>&1 && afplay -v 0.25 -r $(awk -v s=$(od -An -N4 -tu4 /dev/urandom | tr -d ' ') 'BEGIN{srand(s); printf \"%.3f\", 0.85 + rand() * 0.40}') $HOME/.claude/sfx/tool-call-blip.mp3 &"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "in=$(cat); t=$(printf '%s' \"$in\" | jq -r '.transcript_path // \"\"' 2>/dev/null); [ -f \"$t\" ] || exit 0; m=$(tail -n 400 \"$t\" | jq -r 'select(.type==\"assistant\" and (.isSidechain != true)) | .message.model // empty' 2>/dev/null | tail -1); [ -n \"$m\" ] || exit 0; sid=$(printf '%s' \"$in\" | jq -r '.session_id // \"x\"' 2>/dev/null); f=\"${TMPDIR:-/tmp}/claude-model-$sid\"; prev=$(cat \"$f\" 2>/dev/null); [ \"$m\" = \"$prev\" ] && exit 0; printf '%s' \"$m\" > \"$f\"; case \"$m\" in *[Ff]able*) [ -n \"$prev\" ] && command -v afplay > /dev/null 2>&1 && { afplay -v 0.5 $HOME/.claude/sfx/my-hope-will-never-die-mlg.mp3 & } ;; esac; exit 0"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "grep -Eq '\"command\": *\"([^\"]*(&&|\\|\\||;|\\|) *)?cr[[:space:]]+[^\"]*--update-revision' && command -v afplay > /dev/null 2>&1 && { afplay -v 0.25 $HOME/.claude/sfx/pwwwnd.mp3 & }; exit 0"
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "command -v afplay > /dev/null 2>&1 && afplay $HOME/.claude/sfx/record-scratch.mp3 &"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "command -v afplay > /dev/null 2>&1 && afplay $HOME/.claude/sfx/suh.mp3 &"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "in=$(cat); sid=$(printf '%s' \"$in\" | jq -r '.session_id // \"x\"' 2>/dev/null); rm -f \"${TMPDIR:-/tmp}/claude-idle-$sid\"; command -v afplay > /dev/null 2>&1 && afplay -v 0.4 -r $(awk -v s=$(od -An -N4 -tu4 /dev/urandom | tr -d ' ') 'BEGIN{srand(s); printf \"%.3f\", 0.80 + rand() * 0.50}') $HOME/.claude/sfx/minecraft-xp.mp3 &"
+          }
+        ]
+      }
+    ],
+    "StopFailure": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "command -v afplay > /dev/null 2>&1 && afplay $HOME/.claude/sfx/among-us.mp3 &"
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "in=$(cat); printf '%s' \"$in\" | grep -Eq '\"command\": *\"([^\"]*(&&|\\|\\||;|\\|) *)?((npm|bb|brazil-build)( +run)? +(lint|build|release)|bbr( |\"|&|;|\\|)|bb *(\"|&|;|\\|))' && printf '%s' \"$in\" | jq -r '(.tool_response.stdout // \"\") + \"\\n\" + (.tool_response.stderr // \"\") + \"\\n\" + (.error // \"\")' 2>/dev/null | grep -qiE 'BUILD FAILED' && command -v afplay > /dev/null 2>&1 && { afplay -v 0.25 $HOME/.claude/sfx/fahh.mp3 & }; exit 0"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "in=$(cat); printf '%s' \"$in\" | grep -Eq '\"command\": *\"([^\"]*(&&|\\|\\||;|\\|) *)?((npm|yarn|pnpm|bb|brazil-build)( +run)? +test|(npx +)?jest)' || exit 0; out=$(printf '%s' \"$in\" | jq -r '(.tool_response.stdout // \"\") + \"\\n\" + (.tool_response.stderr // \"\") + \"\\n\" + (.error // \"\")' 2>/dev/null); { printf '%s' \"$out\" | grep -qE '(Test Suites|Tests):.*[0-9]+ failed|coverage threshold.*not met|No tests found' || ! printf '%s' \"$out\" | grep -q 'Test Suites:'; } && command -v afplay > /dev/null 2>&1 && { afplay -v 0.25 $HOME/.claude/sfx/roblox-off.mp3 & }; exit 0"
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "command -v afplay > /dev/null 2>&1 && afplay $HOME/.claude/sfx/caught-a-pokemon.mp3 &"
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "command -v afplay > /dev/null 2>&1 && afplay $HOME/.claude/sfx/enderman-teleport.mp3 &"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "command -v afplay > /dev/null 2>&1 && afplay $HOME/.claude/sfx/pluh.mp3 &"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "idle_prompt",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "in=$(cat); sid=$(printf '%s' \"$in\" | jq -r '.session_id // \"x\"' 2>/dev/null); m=\"${TMPDIR:-/tmp}/claude-idle-$sid\"; n=\"$$-$(date +%s)\"; printf '%s' \"$n\" > \"$m\"; command -v afplay > /dev/null 2>&1 && { afplay $HOME/.claude/sfx/crickets-short.mp3 & nohup sh -c 'sleep 15; [ \"$(cat \"$1\" 2>/dev/null)\" = \"$2\" ] && { rm -f \"$1\"; afplay \"$3\"; }' _ \"$m\" \"$n\" \"$HOME/.claude/sfx/where-are-you.mp3\" > /dev/null 2>&1 & }; exit 0"
+          }
+        ]
+      },
+      {
+        "matcher": "elicitation_dialog|permission_prompt",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "command -v afplay > /dev/null 2>&1 && afplay $HOME/.claude/sfx/vine-boom.mp3 &"
+          }
+        ]
+      }
+    ]
+  },
+  "awaySummaryEnabled": false,
+  "voice": {
+    "enabled": true,
+    "mode": "hold"
+  },
+  "skipDangerousModePermissionPrompt": true,
+  "voiceEnabled": true
+}
